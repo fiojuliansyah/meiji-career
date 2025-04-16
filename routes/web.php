@@ -10,6 +10,7 @@ use App\Http\Controllers\DepartmentController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('welcome');
 Route::get('/{slug}/detail', [FrontPageController::class, 'detail'])->name('job.detail');
+Route::post('/apply-job', [FrontPageController::class, 'jobStore'])->name('job.store');
 
 Route::prefix('manage')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -101,9 +101,9 @@
                     @foreach ($relatedCareer as $item) 
                         <li>
                         <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                            <div class="image"><a href="job-details.html"><img src="/frontend/assets/imgs/template/icon.png" alt="Meiji" width="50%"></a></div>
+                            <div class="image"><a href="{{ route('job.detail', $item->slug) }}"><img src="/frontend/assets/imgs/template/icon.png" alt="Meiji" width="50%"></a></div>
                             <div class="info-text">
-                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">{{ $item->name }}</a></h5>
+                            <h5 class="font-md font-bold color-brand-1"><a href="{{ route('job.detail', $item->slug) }}">{{ $item->name }}</a></h5>
                             <div class="mt-0"><span class="card-briefcase">{{ $item->job_type }}</span><span class="card-time">{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span></div>
                         </div>
                         </li>
@@ -125,18 +125,20 @@
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="modal-body pl-30 pr-30 pt-50">
           <div class="text-center">
-            <p class="font-sm text-brand-2">Job Application </p>
+            <p class="font-sm text-brand-2">Job Application</p>
             <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Start your career today</h2>
-            <p class="font-sm text-muted mb-30">Please fill in your information and send it to the employer.                   </p>
+            <p class="font-sm text-muted mb-30">Please fill in your information and send it to the employer.</p>
           </div>
-          <form class="login-register text-start mt-20 pb-30" action="#">
+          <form class="login-register text-start mt-20 pb-30" action="{{ route('job.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="career_id" value="{{ $career->id }}">
             <div class="form-group">
               <label class="form-label" for="input-1">Full Name *</label>
-              <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Steven Job">
+              <input class="form-control" id="input-1" type="text" required="" name="name" placeholder="Steven Job">
             </div>
             <div class="form-group">
               <label class="form-label" for="input-2">Email *</label>
-              <input class="form-control" id="input-2" type="email" required="" name="emailaddress" placeholder="stevenjob@gmail.com">
+              <input class="form-control" id="input-2" type="email" required="" name="email" placeholder="stevenjob@gmail.com">
             </div>
             <div class="form-group">
               <label class="form-label" for="number">Contact Number *</label>
@@ -144,19 +146,19 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="des">Description</label>
-              <input class="form-control" id="des" type="text" required="" name="Description" placeholder="Your description...">
+              <input class="form-control" id="des" type="text" required="" name="description" placeholder="Your description...">
             </div>
             <div class="form-group">
               <label class="form-label" for="file">Upload Resume</label>
-              <input class="form-control" id="file" name="resume" type="file">
+              <input class="form-control" id="file" name="resume" type="file" required>
             </div>
             <div class="login_footer form-group d-flex justify-content-between">
               <label class="cb-container">
-                <input type="checkbox"><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
-              </label><a class="text-muted" href="page-contact.html">Lean more</a>
+                <input type="checkbox" required><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
+              </label><a class="text-muted" href="page-contact.html">Learn more</a>
             </div>
             <div class="form-group">
-              <button class="btn btn-default hover-up w-100" type="submit" name="login">Apply Job</button>
+              <button class="btn btn-default hover-up w-100" type="submit" name="apply_job">Apply Job</button>
             </div>
             <div class="text-muted text-center">Do you need support? <a href="page-contact.html">Contact Us</a></div>
           </form>
@@ -165,3 +167,17 @@
     </div>
   </div>
 @endsection
+
+@if(session('success'))
+    @push('js')
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'Okay'
+        });
+    </script>
+    @endpush
+@endif
+

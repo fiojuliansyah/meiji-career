@@ -14,6 +14,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/frontend/assets/imgs/template/favicon.svg">
     <link href="/frontend/assets/css/style.css?version=4.1" rel="stylesheet">
     <title>Karir | Meiji Indonesia</title>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body>
     @yield('modals')
@@ -36,5 +39,6 @@
     <script src="/frontend/assets/js/noUISlider.js"></script>
     <script src="/frontend/assets/js/slider.js"></script>
     <script src="/frontend/assets/js/main.js?v=4.1"></script>
+    @stack('js')
   </body>
 </html>
