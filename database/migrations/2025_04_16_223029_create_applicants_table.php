@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
             $table->string('career_id');
-            $table->enum('status', ['applicant', 'candidate', 'interview', 'training', 'probation'])->default('applicant');
+            $table->enum('status', ['applicant', 'candidate', 'interview', 'training', 'probation', 'employee'])->default('applicant');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
