@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantController extends Controller
 {
@@ -102,6 +103,16 @@ class ApplicantController extends Controller
      */
     public function destroy(Applicant $applicant)
     {
-        //
+        // Menghapus file resume jika ada
+        if (Storage::exists('public/' . $applicant->resume)) {
+            Storage::delete('public/' . $applicant->resume);
+        }
+    
+        // Menghapus data applicant dari database
+        $applicant->delete();
+    
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Applicant deleted successfully');
     }
+    
 }
