@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\DepartmentController;
@@ -17,6 +18,13 @@ Route::prefix('manage')->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('locations', LocationController::class);
     Route::resource('careers', CareerController::class);
+    Route::resource('applicants', ApplicantController::class);
+
+    Route::get('/candidates', [ApplicantController::class, 'candidate'])->name('candidates.index');
+    Route::get('/interviews', [ApplicantController::class, 'interview'])->name('interviews.index');
+    Route::get('/trainings', [ApplicantController::class, 'training'])->name('trainings.index');
+    Route::get('/probations', [ApplicantController::class, 'probation'])->name('probations.index');
+    Route::get('/employees', [ApplicantController::class, 'employee'])->name('employees.index');
 
 });
 

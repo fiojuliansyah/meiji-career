@@ -40,6 +40,35 @@
                     </ul>
                 </li>                
                 <li class="menu-title"><span>Applicant</span></li>
+                <li>
+                    <ul>
+                        <li class="{{ Route::is('applicants.index') ? 'active' : '' }}">
+                            <a href="{{ route('applicants.index') }}">
+                                <i class="ti ti-users"></i><span>Applicants</span>
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('candidates.index') ? 'active' : '' }}">
+                            <a href="{{ route('candidates.index') }}">
+                                <i class="ti ti-users"></i><span>Candidates</span>
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('interviews.index') ? 'active' : '' }}">
+                            <a href="{{ route('interviews.index') }}">
+                                <i class="ti ti-users"></i><span>Interview</span>
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('trainings.index') ? 'active' : '' }}">
+                            <a href="{{ route('trainings.index') }}">
+                                <i class="ti ti-users"></i><span>Training</span>
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('probations.index') ? 'active' : '' }}">
+                            <a href="{{ route('probations.index') }}">
+                                <i class="ti ti-users"></i><span>Probation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>  
             </ul>
         </div>
     </div>
